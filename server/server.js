@@ -1,14 +1,27 @@
 const express = require('express');
+const http = require('http');
 const path = require('path');
+const socketIO = require('socket.io');
 
 const port = process.env.PORT || 3000;
 const app = express();
-
+const server = http.createServer(app);
+const io = socketIO(server);
 
 const publicPath = path.join(__dirname, '../public');
 
 app.use(express.static(publicPath));
 
-app.listen(port, () => {
+io.on('connection', (socket) => {
+    console.log('New user connected');
+
+    socket.on('disconnect', () => {
+        console.log('User disconnected');
+    });
+});
+
+server.listen(port, () => {
     console.log(`Server is up on port ${port}`);;
 });
+
+// http is used instead of the normal express and app.listen() because it is needed for websockets to be integrated.
