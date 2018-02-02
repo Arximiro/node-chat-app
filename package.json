@@ -1,0 +1,16 @@
+{
+  "name": "node-chat-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "David Ridgley",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "engines": {
+    "node": "9.3.0"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
