@@ -4,7 +4,7 @@
   "main": "index.js",
   "author": "David Ridgley",
   "license": "MIT",
-  "//comment1": " ** Selects files within any folder in the server folder. * says any filename ending in .test.js", 
+  "//comment1": " ** Selects files within any folder in the server folder. * says any filename ending in .test.js",
   "scripts": {
     "start": "node server/server.js",
     "test": "mocha server/**/*.test.js",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "express": "^4.16.2",
+    "moment": "^2.20.1",
     "socket.io": "^2.0.4"
   },
   "devDependencies": {

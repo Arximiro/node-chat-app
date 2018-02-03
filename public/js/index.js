@@ -5,18 +5,19 @@ socket.on('connect', () => {
 });
 
 socket.on('newMessage', (msg) => {
-    console.log(msg);
+    const formattedTime = moment(msg.createdAt).format('h:mm a');
     const li = $('<li></li>');
-    li.text(`${msg.from}: ${msg.text}`);
+    li.text(`${msg.from} ${formattedTime}: ${msg.text}`);
 
     $('#messages').append(li);
 });
 
 socket.on('newLocationMessage', (msg) => {
+    const formattedTime = moment(msg.createdAt).format('h:mm a');
     const li = $('<li></li>');
     const a = $('<a target="_blank">My current Location</a>');
 
-    li.text(`${msg.from}: `);
+    li.text(`${msg.from} ${formattedTime}: `);
     a.attr('href', msg.url);
     li.append(a);
 
@@ -25,7 +26,7 @@ socket.on('newLocationMessage', (msg) => {
 
 $('#message-form').on('submit', (e) => {
     e.preventDefault();
-    const messageTextbox = $('[name=message]')
+    const messageTextbox = $('#message')
 
     socket.emit('createMessage', {
         from: 'User',
