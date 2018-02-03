@@ -15,14 +15,14 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
     console.log('New user connected');
 
-    socket.emit('newMessage', {
-        from: 'weedgrl69',
-        text: 'My parents r gone!',
-        createdAt: 12731874971290
-    });
-
     socket.on('createMessage', (msg) => {
         console.log(msg);
+
+        io.emit('newMessage', {
+            from: msg.from,
+            text: msg.text,
+            createdAt: new Date().getTime()
+        });
     });
 
     socket.on('disconnect', () => {
@@ -40,4 +40,6 @@ server.listen(port, () => {
 // io.on() can listen for events and then respond when they occur, the most popular is connection. Listen for connection and do x.
 // when connected in the callback function access to that socket or connection is provided.
 // socket.emit() emits a new event
-// socken.on() listens for events similar to io.on()
+// socket.on() listens for events similar to io.on()
+
+// io.emit() can emit events to all connected users, while socket.emit() is just for an individual connection.
